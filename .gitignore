@@ -230,3 +230,5 @@ tmp/
 *.zip
 *.tar.gz
 data/
+.idea/
+*.iml
