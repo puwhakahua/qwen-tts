@@ -79,7 +79,7 @@ def clone(ref_audio: str, ref_text: str, input_file: str, output_dir: str, langu
                     fp.write(text)
                     fp.write("\n")
 
-            if i % 100 == 0:
+            if i % 10 == 0:
                 print("%d/%d..." % (i+1, total))
 
         except Exception:
