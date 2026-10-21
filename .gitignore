@@ -232,3 +232,5 @@ tmp/
 data/
 .idea/
 *.iml
+cache/
+
