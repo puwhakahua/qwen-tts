@@ -39,11 +39,15 @@ def clone(ref_audio: str, ref_text: str, input_file: str, output_dir: str, langu
         print("Loading reference text from: %s" % ref_text)
         with open(ref_text, "r", encoding="utf-8") as f:
             lines = [line.strip() for line in f if line.strip()]
+        # remove empty lines
+        lines = list(filter(lambda x: x.strip(), lines))
         ref_text = " ".join(lines)
 
     print("Loading lines of text from: %s" % input_file)
     with open(input_file, "r", encoding="utf-8") as f:
         texts = [line.strip() for line in f if line.strip()]
+    # remove empty lines
+    texts = list(filter(lambda x: x.strip(), texts))
 
     total = len(texts)
     print("%d lines loaded." % total)
