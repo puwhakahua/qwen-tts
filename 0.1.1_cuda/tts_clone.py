@@ -35,6 +35,12 @@ def clone(ref_audio: str, ref_text: str, input_file: str, output_dir: str, langu
     out_path = Path(output_dir)
     out_path.mkdir(parents=True, exist_ok=True)
 
+    if os.path.isfile(ref_text):
+        print("Loading reference text from: %s" % ref_text)
+        with open(ref_text, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f if line.strip()]
+        ref_text = " ".join(lines)
+
     print("Loading lines of text from: %s" % input_file)
     with open(input_file, "r", encoding="utf-8") as f:
         texts = [line.strip() for line in f if line.strip()]
@@ -82,13 +88,13 @@ def clone(ref_audio: str, ref_text: str, input_file: str, output_dir: str, langu
 
 def main():
     parser = argparse.ArgumentParser(description="qwen-tts - voice cloning", prog="qwen_tts_clone", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--ref_audio', help='Path to the 30s of reference audio to use', required=True, default=None)
-    parser.add_argument('--ref_text', help='The transcript of the reference audio', required=True, default=None)
-    parser.add_argument('--input_file', help='The text file with lines of text to generate audio for.', required=True, default=None)
-    parser.add_argument('--output_dir', help='The directory to store the generated audio in.', required=True, default=None)
-    parser.add_argument('--language', help='The language of the audio.', required=False, default="English")
-    parser.add_argument('--model', help='The Qwen model to use.', required=False, default="Qwen/Qwen3-TTS-12Hz-1.7B-Base")
-    parser.add_argument('--device', help='The device to run the model on.', required=False, default="cuda:0")
+    parser.add_argument('--ref_audio', metavar="FILE", help='Path to the 30s of reference audio to use', required=True, default=None)
+    parser.add_argument('--ref_text', metavar="TEXT|FILE", help='The transcript of the reference audio', required=True, default=None)
+    parser.add_argument('--input_file', metavar="FILE", help='The text file with lines of text to generate audio for.', required=True, default=None)
+    parser.add_argument('--output_dir', metavar="DIR", help='The directory to store the generated audio in.', required=True, default=None)
+    parser.add_argument('--language', metavar="LANG", help='The language of the audio.', required=False, default="English")
+    parser.add_argument('--model', metavar="MODEL", help='The Qwen model to use.', required=False, default="Qwen/Qwen3-TTS-12Hz-1.7B-Base")
+    parser.add_argument('--device', metavar="DEVICE", help='The device to run the model on.', required=False, default="cuda:0")
     parser.add_argument('--save_text', action='store_true', help='Whether to save the text alongside the generated audio as well.', required=False)
     parsed = parser.parse_args()
 
