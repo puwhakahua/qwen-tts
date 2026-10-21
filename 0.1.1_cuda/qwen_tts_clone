@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/opt/qwen-tts/bin/python /opt/qwen-tts-extra/tts_clone.py "$@"
+

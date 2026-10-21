@@ -13,5 +13,9 @@ RUN . /opt/qwen-tts/bin/activate && \
         "qwen-tts==0.1.1"
 
 COPY bash.bashrc /etc/bash.bashrc
+COPY qwen_tts_* /usr/local/bin/
+COPY tts_*.py /opt/qwen-tts-extra/
+
+ENV PYTHONPATH=/opt/qwen-tts-extra
 
 ENTRYPOINT ["/bin/bash"]
