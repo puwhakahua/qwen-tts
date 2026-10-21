@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# other
+*~
+*.swp
+*.bak
+test/
+output/
+predictions/
+tmp/
+*.zip
+*.tar.gz
+data/
