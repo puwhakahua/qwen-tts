@@ -17,5 +17,6 @@ COPY qwen_tts_* /usr/local/bin/
 COPY tts_*.py /opt/qwen-tts-extra/
 
 ENV PYTHONPATH=/opt/qwen-tts-extra
+ENV NUMBA_CACHE_DIR=/tmp
 
 ENTRYPOINT ["/bin/bash"]
