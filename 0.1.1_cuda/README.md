@@ -17,7 +17,8 @@ Uses PyTorch 2.10 and qwen-tts 0.1.1.
 * Pull and run image (adjust volume mappings `-v`):
 
   ```bash
-  docker run --shm-size 8G --net=host \
+  docker run -u $(id -u):$(id -g) -e USER=$USER --shm-size 8G --net=host \
+    -v /local/cache:/.cache \
     -v /local/dir:/container/dir \
     -it harbor.cms.waikato.ac.nz/public/puwhakahua/qwen-tts:0.1.1_cuda
   ```
@@ -27,7 +28,8 @@ Uses PyTorch 2.10 and qwen-tts 0.1.1.
 * Pull and run image (adjust volume mappings `-v`):
 
   ```bash
-  docker run --shm-size 8G --net=host \
+  docker run -u $(id -u):$(id -g) -e USER=$USER --shm-size 8G --net=host \
+    -v /local/cache:/.cache \
     -v /local/dir:/container/dir \
     -it waikatodatamining/qwen-tts:0.1.1_cuda
   ```
@@ -43,7 +45,10 @@ Uses PyTorch 2.10 and qwen-tts 0.1.1.
 * Run the container
 
   ```bash
-  docker run --shm-size 8G --net=host -v /local/dir:/container/dir -it qwen-tts
+  docker run -u $(id -u):$(id -g) -e USER=$USER --shm-size 8G --net=host \
+    -v /local/cache:/.cache \
+    -v /local/dir:/container/dir \
+    -it qwen-tts
   ```
   `/local/dir:/container/dir` maps a local disk directory into a directory inside the container
 
@@ -125,4 +130,5 @@ docker run -u $(id -u):$(id -g) -e USER=$USER ...
 
 The following additional scripts are available:
 
-* `...` - TODO
+* `qwen_tts_clone` - for cloning a voice using a 30 seconds sample with associated transcript
+
